@@ -2,6 +2,8 @@ package com.example.chess.game.model;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Objects;
+
 @AllArgsConstructor
 public class Location {
 
@@ -20,6 +22,11 @@ public class Location {
         Location location = (Location) o;
         return x == location.x &&
                 y == location.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     private char getColumnLetter() {

@@ -1,17 +1,14 @@
 package com.example.chess.game;
 
 import com.example.chess.game.exception.ChessException;
+import com.example.chess.game.exception.GameEndedException;
 import com.example.chess.game.exception.UnknownGameException;
-import com.example.chess.game.model.Game;
-import com.example.chess.game.model.Location;
-import com.example.chess.game.model.MovePieceResult;
-import com.example.chess.game.model.Player;
+import com.example.chess.game.model.*;
 import com.example.chess.game.util.BoardTemplate;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.Collections;
 
 @Component
 @AllArgsConstructor
@@ -34,6 +31,10 @@ public class GameService {
     public MovePieceResult movePiece(String gameId, String locationFromStr, String locationToStr)  throws ChessException {
         Game game = getGameState(gameId);
 
+        if (game.getState() == GameState.CHECKMATE) {
+            throw new GameEndedException(gameId, game.getWinner());
+        }
+
         Location locationFrom = Location.fromText(locationFromStr);
         Location locationTo = Location.fromText(locationToStr);
 
@@ -41,7 +42,7 @@ public class GameService {
         Collection<String> moveConsequences = game.movePiece(locationFrom, locationTo);
 
         // verify game state, check/checkmate?
-        moveConsequences.addAll(checkGameEndCondition(game));
+        moveConsequences.addAll(game.checkGameEndCondition());
 
         game.rotateCurrentPlayer();
 
@@ -52,8 +53,4 @@ public class GameService {
                 .build();
     }
 
-    private Collection<String> checkGameEndCondition(Game game) {
-
-        return Collections.emptyList();
-    }
 }

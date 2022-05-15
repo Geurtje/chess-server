@@ -75,13 +75,13 @@ public class MoveHelper {
 
         for (MovementOffset movementOffset : movementOffsets) {
             Location possibleLocation = movementOffset.applyTo(from);
-            if (game.isLocationOnBoard(possibleLocation) && game.isLocationEmptyOrHasOpponent(possibleLocation)) {
+            if (game.isLocationOnBoard(possibleLocation) && game.isLocationEmptyOrHasOpponent(possibleLocation, piece.owner)) {
                 possibleMoves.add(possibleLocation);
 
-                // if this offset is repeating we'll repeat it until we encounter a piece
+                // if this movement can be repeated we'll apply it until we encounter a piece
                 while (movementOffset.repeating && game.isLocationEmpty(possibleLocation)) {
                     possibleLocation = movementOffset.applyTo(possibleLocation);
-                    if (game.isLocationOnBoard(possibleLocation) && game.isLocationEmptyOrHasOpponent(possibleLocation)) {
+                    if (game.isLocationOnBoard(possibleLocation) && game.isLocationEmptyOrHasOpponent(possibleLocation, piece.owner)) {
                         possibleMoves.add(possibleLocation);
                     } else {
                         break;

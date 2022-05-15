@@ -92,7 +92,6 @@ public class MoveHelperTest {
                 "________\n" +
                 "________\n";
         Game g = new Game("test", Player.WHITE, TestBoardBuilder.buildBoard(boardState));
-        System.out.println(GameStateVisualizer.visualizeGameBoard(g));
 
         Location l = Location.fromText("D4");
         Piece knight = g.getPieceAtLocation(l);
@@ -110,7 +109,6 @@ public class MoveHelperTest {
                 "________\n" +
                 "_♘______";
         Game g = new Game("test", Player.WHITE, TestBoardBuilder.buildBoard(boardState));
-        System.out.println(GameStateVisualizer.visualizeGameBoard(g));
 
         Location l = Location.fromText("B1");
         Piece knight = g.getPieceAtLocation(l);
@@ -128,7 +126,6 @@ public class MoveHelperTest {
                 "_♞______\n" +
                 "___♟____";
         Game g = new Game("test", Player.BLACK, TestBoardBuilder.buildBoard(boardState));
-        System.out.println(GameStateVisualizer.visualizeGameBoard(g));
 
         Location l = Location.fromText("B2");
         Piece knight = g.getPieceAtLocation(l);
@@ -144,7 +141,6 @@ public class MoveHelperTest {
                         "_♖__\n" +
                         "____\n";
         Game g = new Game("test", Player.WHITE, TestBoardBuilder.buildBoard(boardState));
-        System.out.println(GameStateVisualizer.visualizeGameBoard(g));
 
         Location l = Location.fromText("B2");
         Piece rook = g.getPieceAtLocation(l);
@@ -160,7 +156,6 @@ public class MoveHelperTest {
                 "____\n" +
                 "♜_♖_\n";
         Game g = new Game("test", Player.BLACK, TestBoardBuilder.buildBoard(boardState));
-        System.out.println(GameStateVisualizer.visualizeGameBoard(g));
 
         Location l = Location.fromText("A1");
         Piece rook = g.getPieceAtLocation(l);
@@ -179,7 +174,6 @@ public class MoveHelperTest {
                         "_♝___\n" +
                         "_____\n";
         Game g = new Game("test", Player.BLACK, TestBoardBuilder.buildBoard(boardState));
-        System.out.println(GameStateVisualizer.visualizeGameBoard(g));
 
         Location l = Location.fromText("B2");
         Piece bishop = g.getPieceAtLocation(l);
@@ -197,7 +191,6 @@ public class MoveHelperTest {
                         "_____\n" +
                         "_____\n";
         Game g = new Game("test", Player.WHITE, TestBoardBuilder.buildBoard(boardState));
-        System.out.println(GameStateVisualizer.visualizeGameBoard(g));
 
         Location l = Location.fromText("D4");
         Piece queen = g.getPieceAtLocation(l);
@@ -220,7 +213,6 @@ public class MoveHelperTest {
                         "____\n" +
                         "____\n";
         Game g = new Game("test", Player.WHITE, TestBoardBuilder.buildBoard(boardState));
-        System.out.println(GameStateVisualizer.visualizeGameBoard(g));
 
         Location l = Location.fromText("A3");
         Piece king = g.getPieceAtLocation(l);

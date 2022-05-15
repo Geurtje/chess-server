@@ -4,20 +4,26 @@ import com.example.chess.game.exception.ChessException;
 import com.example.chess.game.exception.InvalidMoveException;
 import com.example.chess.game.util.MoveHelper;
 import com.example.chess.piece.Piece;
-import lombok.AllArgsConstructor;
+import com.example.chess.piece.PieceType;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Getter
 public class Game {
 
     private final String id;
     private Player currentPlayer;
+    private Player winner;
     private final Piece[][] board;
+    private GameState state = GameState.UNDECIDED;
+
+    public Game(String id, Player currentPlayer, Piece[][] board) {
+        this.id = id;
+        this.currentPlayer = currentPlayer;
+        this.board = board;
+    }
 
     public void rotateCurrentPlayer() {
         if (currentPlayer == Player.WHITE) {
@@ -37,9 +43,9 @@ public class Game {
         return getPieceAtLocation(l) != null;
     }
 
-    public boolean isLocationEmptyOrHasOpponent(Location l) {
+    public boolean isLocationEmptyOrHasOpponent(Location l, Player player) {
         Piece p = getPieceAtLocation(l);
-        return p == null || p.owner != currentPlayer;
+        return p == null || p.owner != player;
     }
 
     public boolean isLocationEmpty(Location l) {
@@ -93,4 +99,82 @@ public class Game {
         return moveConsequences;
     }
 
+    public Collection<String> checkGameEndCondition() {
+        state = validateState();
+
+        if (state == GameState.CHECK) {
+            return Collections.singleton("check");
+        }
+        else if (state == GameState.CHECKMATE) {
+            winner = currentPlayer;
+            return List.of("checkmate", "game has ended, " + winner + " is the winner");
+        }
+
+        return Collections.emptyList();
+    }
+
+    LocationPiece findOpponentKing() {
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[y].length; x++) {
+                Piece p = board[y][x];
+                if (p != null && p.pieceType == PieceType.KING && p.owner != currentPlayer) {
+                    return new LocationPiece(new Location(x, y), p);
+                }
+            }
+        }
+
+        Player opponent = currentPlayer == Player.WHITE ? Player.BLACK : Player.WHITE;
+        throw new IllegalStateException("unable to find king for player " + opponent + " the game is in an invalid state");
+    }
+
+    Collection<LocationPiece> getAllPlayerPieces() {
+        Collection<LocationPiece> playerPieces = new ArrayList<>();
+
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[y].length; x++) {
+                Piece p = board[y][x];
+                if (p != null && p.owner == currentPlayer) {
+                    playerPieces.add(new LocationPiece(new Location(x, y), p));
+                }
+            }
+        }
+
+        return playerPieces;
+    }
+
+    /**
+     * Get the current state of the game, intended to be called after a player has just made a move.
+     * @return
+     */
+    public GameState validateState() {
+        // find the location of the opponent's king
+        LocationPiece opponentKing = findOpponentKing();
+
+        // get all possible moves for the current player
+        Collection<LocationPiece> playerPieces = getAllPlayerPieces();
+        Set<Location> possibleNextMoveLocations = playerPieces.stream()
+                .map(lp -> MoveHelper.getPossibleMoves(this, lp.piece, lp.location))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+
+        // and check if any of the moves for the
+        if (possibleNextMoveLocations.contains(opponentKing.location)) {
+            ///  check! might be checkmate if the king can't move anywhere safe
+            // other edge conditions:
+            // - capturing an opposing piece to remove an attack on the king
+            // - placing a piece in the way of the king to prevent an opponent from capturing it
+
+
+            // get opponent king possible locations
+            Collection<Location> possibleKingMoves = MoveHelper.getPossibleMoves(this, opponentKing.piece, opponentKing.location);
+            if (possibleNextMoveLocations.containsAll(possibleKingMoves)) {
+                return GameState.CHECKMATE;
+            }
+            else {
+                return GameState.CHECK;
+            }
+        }
+
+        return GameState.UNDECIDED;
+    }
 }
