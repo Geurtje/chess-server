@@ -4,6 +4,7 @@ import com.example.chess.game.exception.ChessException;
 import com.example.chess.game.model.Game;
 import com.example.chess.game.model.MovePieceRequest;
 import com.example.chess.game.model.MovePieceResult;
+import com.example.chess.game.util.GameStateVisualizer;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

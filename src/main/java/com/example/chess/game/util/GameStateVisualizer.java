@@ -1,4 +1,4 @@
-package com.example.chess.game;
+package com.example.chess.game.util;
 
 import com.example.chess.game.model.Game;
 import com.example.chess.piece.Piece;
@@ -25,7 +25,7 @@ public class GameStateVisualizer {
             Piece[] row = board[i];
             strBuilder.append(i+1).append("|")
                     .append(String.join("|", convertPiecesForDisplay(row)))
-                    .append("|\n");
+                    .append("|").append(i+1).append("\n");
         }
 
         strBuilder.append("  AㅤBㅤCㅤDㅤEㅤFㅤGㅤH\n");

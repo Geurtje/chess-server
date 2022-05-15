@@ -2,23 +2,15 @@ package com.example.chess.game.model;
 
 import lombok.AllArgsConstructor;
 
-import java.util.Objects;
-
 @AllArgsConstructor
 public class Location {
 
-    //public final String text;
     public final int x;
     public final int y;
 
-
-    public String getText() {
+    @Override
+    public String toString() {
         return String.format("%c%s", getColumnLetter(), getRowNumber());
-    }
-
-    public boolean isInBounds() {
-        return x >= 0 && x <= 7 &&
-                y >= 0 && y <= 7;
     }
 
     @Override
@@ -57,6 +49,12 @@ public class Location {
         return String.valueOf(y+1);
     }
 
+    /**
+     *
+     * @param locationText A chess position such as "A1", "B5", "D8"
+     * @return A location that refers to the x and y coordinates of that location on the board.
+     * @throws IllegalArgumentException
+     */
     public static Location fromText(String locationText) throws IllegalArgumentException {
         if (locationText.length() != 2) {
             throw new IllegalArgumentException("location text length should be 2 (e.g. B3)");
@@ -107,5 +105,4 @@ public class Location {
         // columns are indexed from 0, so deduct one
         return columnNumber-1;
     }
-
 }
