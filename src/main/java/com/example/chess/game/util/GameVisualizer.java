@@ -1,6 +1,7 @@
 package com.example.chess.game.util;
 
 import com.example.chess.game.Game;
+import com.example.chess.game.model.GameState;
 import com.example.chess.game.piece.Piece;
 import lombok.experimental.UtilityClass;
 
@@ -60,7 +61,13 @@ public class GameVisualizer {
         strBuilder.append("#######################\n")
                 .append("Game: ").append(game.getId()).append("\n")
                 .append("Current player: ").append(game.getCurrentPlayer()).append("\n")
-                .append("#######################\n\n")
+                .append("State: ").append(game.getState()).append("\n");
+
+        if (game.getState() == GameState.CHECKMATE) {
+            strBuilder.append("Winner: ").append(game.getWinner()).append("\n");
+        }
+
+        strBuilder.append("#######################\n\n")
                 .append(COLUMNS);
 
         Piece[][] board = game.getBoard();

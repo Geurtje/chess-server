@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "c7b5c057-c97b-44f2-97e5-09817abe61bf",
+		"name": "chess-server-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Start game",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// update the collection variable `game_id` with the id of the newly created game\r",
+							"pm.collectionVariables.set(\"game_id\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/chess/game/create",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"chess",
+						"game",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Game state",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/chess/game/{{game_id}}/state",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"chess",
+						"game",
+						"{{game_id}}",
+						"state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Game state unknown game",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/chess/game/{{game_id}}/state",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"chess",
+						"game",
+						"{{game_id}}",
+						"state"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:8080",
+			"type": "default"
+		},
+		{
+			"key": "game_id",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
