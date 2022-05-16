@@ -1,5 +1,6 @@
 package com.example.chess.game.model;
 
+import com.example.chess.game.Game;
 import lombok.Builder;
 
 import java.util.Collection;

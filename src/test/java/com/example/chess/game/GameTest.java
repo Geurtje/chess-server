@@ -1,13 +1,15 @@
-package com.example.chess.game.model;
+package com.example.chess.game;
 
+import com.example.chess.game.Game;
 import com.example.chess.game.exception.InvalidMoveException;
-import com.example.chess.piece.Piece;
+import com.example.chess.game.model.*;
+import com.example.chess.game.piece.Piece;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
-import static com.example.chess.piece.Piece.*;
+import static com.example.chess.game.piece.Piece.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.junit.jupiter.api.Assertions.assertThrows;

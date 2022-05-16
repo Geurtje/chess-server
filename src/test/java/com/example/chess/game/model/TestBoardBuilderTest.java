@@ -1,10 +1,10 @@
 package com.example.chess.game.model;
 
-import com.example.chess.piece.Piece;
+import com.example.chess.game.piece.Piece;
 import org.assertj.core.api.AutoCloseableSoftAssertions;
 import org.junit.jupiter.api.Test;
 
-import static com.example.chess.piece.Piece.*;
+import static com.example.chess.game.piece.Piece.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestBoardBuilderTest {

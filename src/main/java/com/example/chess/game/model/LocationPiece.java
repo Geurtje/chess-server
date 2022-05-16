@@ -1,6 +1,6 @@
 package com.example.chess.game.model;
 
-import com.example.chess.piece.Piece;
+import com.example.chess.game.piece.Piece;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

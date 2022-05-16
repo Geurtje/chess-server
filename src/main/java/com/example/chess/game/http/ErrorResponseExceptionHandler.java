@@ -1,7 +1,6 @@
-package com.example.chess.game;
+package com.example.chess.game.http;
 
 import com.example.chess.game.exception.ChessException;
-import com.example.chess.game.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,9 @@
 package com.example.chess.game.util;
 
-import com.example.chess.piece.Piece;
+import com.example.chess.game.piece.Piece;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class BoardTemplate {
 
     public static Piece[][] createNewBoard() {

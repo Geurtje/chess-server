@@ -1,4 +1,4 @@
-package com.example.chess.piece;
+package com.example.chess.game.piece;
 
 import com.example.chess.game.model.Player;
 import lombok.AllArgsConstructor;
@@ -24,9 +24,5 @@ public enum Piece {
     @Override
     public String toString() {
         return owner + " " + pieceType;
-    }
-
-    public String getSymbol() {
-        return pieceType.getSymbolForPlayer(owner);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.chess.game.model;
+package com.example.chess.game.http;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

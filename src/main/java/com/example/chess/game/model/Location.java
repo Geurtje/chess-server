@@ -4,6 +4,11 @@ import lombok.AllArgsConstructor;
 
 import java.util.Objects;
 
+/**
+ * A Location is just an x, y position on a game board.
+ * This class has a bunch of utility methods to interface with the coordinates in a normal chess
+ * terms, for example you can use Location.fromText("A4"), to create a Location with x = 1 and y = 3.
+ */
 @AllArgsConstructor
 public class Location {
 

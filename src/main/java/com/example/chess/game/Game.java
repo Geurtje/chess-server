@@ -1,10 +1,14 @@
-package com.example.chess.game.model;
+package com.example.chess.game;
 
 import com.example.chess.game.exception.ChessException;
 import com.example.chess.game.exception.InvalidMoveException;
-import com.example.chess.game.util.MoveHelper;
-import com.example.chess.piece.Piece;
-import com.example.chess.piece.PieceType;
+import com.example.chess.game.model.GameState;
+import com.example.chess.game.model.Location;
+import com.example.chess.game.model.LocationPiece;
+import com.example.chess.game.model.Player;
+import com.example.chess.game.piece.MoveHelper;
+import com.example.chess.game.piece.Piece;
+import com.example.chess.game.piece.PieceType;
 import lombok.Getter;
 
 import java.util.*;

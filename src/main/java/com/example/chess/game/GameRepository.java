@@ -1,6 +1,5 @@
 package com.example.chess.game;
 
-import com.example.chess.game.model.Game;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;

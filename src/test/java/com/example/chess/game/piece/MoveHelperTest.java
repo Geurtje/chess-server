@@ -1,10 +1,11 @@
-package com.example.chess.game.util;
+package com.example.chess.game.piece;
 
-import com.example.chess.game.model.Game;
+import com.example.chess.game.Game;
 import com.example.chess.game.model.Location;
 import com.example.chess.game.model.Player;
 import com.example.chess.game.model.TestBoardBuilder;
-import com.example.chess.piece.Piece;
+import com.example.chess.game.piece.MoveHelper;
+import com.example.chess.game.piece.Piece;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
