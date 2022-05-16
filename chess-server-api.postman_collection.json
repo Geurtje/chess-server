@@ -6,6 +6,193 @@
 	},
 	"item": [
 		{
+			"name": "Example game",
+			"item": [
+				{
+					"name": "Start example game",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// update the collection variable `game_id` with the id of the newly created game\r",
+									"pm.collectionVariables.set(\"game_id_ex1\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/chess/game/create",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chess",
+								"game",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move white pawn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"location_from\": \"F2\",\r\n    \"location_to\": \"F4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/chess/game/{{game_id_ex1}}/move",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chess",
+								"game",
+								"{{game_id_ex1}}",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move black knight 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"location_from\": \"G8\",\r\n    \"location_to\": \"F6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/chess/game/{{game_id_ex1}}/move",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chess",
+								"game",
+								"{{game_id_ex1}}",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move white king",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"location_from\": \"E1\",\r\n    \"location_to\": \"F2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/chess/game/{{game_id_ex1}}/move",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chess",
+								"game",
+								"{{game_id_ex1}}",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move black knight 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"location_from\": \"F6\",\r\n    \"location_to\": \"E4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/chess/game/{{game_id_ex1}}/move",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chess",
+								"game",
+								"{{game_id_ex1}}",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Visualize example game",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/chess/game/{{game_id_ex1}}/visualize",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chess",
+								"game",
+								"{{game_id_ex1}}",
+								"visualize"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Start game",
 			"event": [
 				{
@@ -73,7 +260,28 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}/chess/game/{{game_id}}/state",
+					"raw": "http://{{host}}/chess/game/game-does-not-exist/state",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"chess",
+						"game",
+						"game-does-not-exist",
+						"state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Visualize game",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/chess/game/{{game_id}}/visualize",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -82,7 +290,64 @@
 						"chess",
 						"game",
 						"{{game_id}}",
-						"state"
+						"visualize"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Possible moves",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/chess/game/{{game_id}}/moves?location=B2",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"chess",
+						"game",
+						"{{game_id}}",
+						"moves"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "B2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Move pawn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"location_from\": \"A2\",\r\n    \"location_to\": \"A3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/chess/game/{{game_id}}/move",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"chess",
+						"game",
+						"{{game_id}}",
+						"move"
 					]
 				}
 			},
@@ -117,6 +382,11 @@
 		},
 		{
 			"key": "game_id",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "game_id_ex1",
 			"value": "",
 			"type": "default"
 		}
